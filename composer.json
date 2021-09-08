@@ -1,0 +1,27 @@
+{
+  "name": "fsi_engine/fsi_php_sdk",
+  "description": "This package is an SDK for fsi engine providers endpoints",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Blessing Ajala",
+      "email": "blessingcodephp@gmail.com",
+      "homepage": "https://about.me/blessingajala",
+      "role": "Software Developer"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "FsiEngine\\":"src/"
+    },
+    "classmap": [
+    ]
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8"
+  }
+}
