@@ -3,7 +3,7 @@
 namespace ProvidersTests\WovenFinanceTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class EditVirtualAccountTest extends \PHPUnit\Framework\TestCase
 {
@@ -30,8 +30,8 @@ class EditVirtualAccountTest extends \PHPUnit\Framework\TestCase
             'requestId'                 => '023089fc-4b48-40b9-a20b-f0e2eefd8c4c'
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processEditVirtualAccountProvider = $fsiEngineSDK->processWovenFinanceProvider()->EditVirtualAccount;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processEditVirtualAccountProvider = FsiEngine::WovenFinanceProvider()->EditVirtualAccount;
         $response = $processEditVirtualAccountProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

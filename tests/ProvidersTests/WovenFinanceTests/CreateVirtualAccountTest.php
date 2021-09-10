@@ -3,7 +3,7 @@
 namespace ProvidersTests\WovenFinanceTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class CreateVirtualAccountTest extends \PHPUnit\Framework\TestCase
 {
@@ -29,8 +29,8 @@ class CreateVirtualAccountTest extends \PHPUnit\Framework\TestCase
             'api-secret'                => 'vb_ls_bfac75fe54a952841971b6918d06aeb2659523dc92d6',
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processCreateVirtualAccountProvider = $fsiEngineSDK->processWovenFinanceProvider()->CreateVirtualAccount;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processCreateVirtualAccountProvider = FsiEngine::WovenFinanceProvider()->CreateVirtualAccount;
         $response = $processCreateVirtualAccountProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

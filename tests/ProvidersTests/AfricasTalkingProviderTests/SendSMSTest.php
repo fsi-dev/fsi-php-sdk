@@ -2,7 +2,7 @@
 
 namespace ProvidersTests\AfricasTalkingProviderTests;
 use \FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class SendSMSTest extends \PHPUnit\Framework\TestCase
 {
@@ -15,8 +15,8 @@ class SendSMSTest extends \PHPUnit\Framework\TestCase
             "message"   => "up town girl"
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processSMSProvider = $fsiEngineSDK->processAfricasTalkingProvider()->Sms;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processSMSProvider = FsiEngine::AfricasTalkingProvider()->Sms;
         $response = $processSMSProvider->send($formData);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

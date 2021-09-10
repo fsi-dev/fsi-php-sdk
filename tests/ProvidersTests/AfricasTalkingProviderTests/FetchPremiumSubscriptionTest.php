@@ -3,7 +3,7 @@
 namespace ProvidersTests\AfricasTalkingProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class FetchPremiumSubscriptionTest  extends \PHPUnit\Framework\TestCase
 {
@@ -15,8 +15,8 @@ class FetchPremiumSubscriptionTest  extends \PHPUnit\Framework\TestCase
             "keyword"   => "slander"
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processFetchPremiumSubscriptionProvider = $fsiEngineSDK->processAfricasTalkingProvider()->FetchPremiumSubscription;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processFetchPremiumSubscriptionProvider = FsiEngine::AfricasTalkingProvider()->FetchPremiumSubscription;
         $response = $processFetchPremiumSubscriptionProvider->send($formData);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

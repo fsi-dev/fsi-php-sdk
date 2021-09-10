@@ -3,7 +3,7 @@
 namespace ProvidersTests\SterlingBankProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class GetBillersISWTest extends \PHPUnit\Framework\TestCase
 {
@@ -24,8 +24,8 @@ class GetBillersISWTest extends \PHPUnit\Framework\TestCase
             'ipval'                     => 0
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processGetBillersISWProvider = $fsiEngineSDK->processSterlingBankProvider()->GetBillersISW;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processGetBillersISWProvider = FsiEngine::SterlingBankProvider()->GetBillersISW;
         $response = $processGetBillersISWProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

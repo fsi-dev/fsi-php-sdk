@@ -3,7 +3,7 @@
 namespace ProvidersTests\FCMBProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class NIPTransfersDaterangeTest extends \PHPUnit\Framework\TestCase
 {
@@ -21,8 +21,8 @@ class NIPTransfersDaterangeTest extends \PHPUnit\Framework\TestCase
             'Accept'                    => 'application/json'
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processNIPTransfersDaterangeProvider = $fsiEngineSDK->processFCMBProvider()->NIPTransfersDaterange;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processNIPTransfersDaterangeProvider = FsiEngine::FCMBProvider()->NIPTransfersDaterange;
         $response = $processNIPTransfersDaterangeProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

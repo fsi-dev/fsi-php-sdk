@@ -3,7 +3,7 @@
 namespace ProvidersTests\WovenFinanceTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class ListTransactionsTest extends \PHPUnit\Framework\TestCase
 {
@@ -27,8 +27,8 @@ class ListTransactionsTest extends \PHPUnit\Framework\TestCase
             'requestId'                 => '023089fc-4b48-40b9-a20b-f0e2eefd8c4c'
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processListTransactionsProvider = $fsiEngineSDK->processWovenFinanceProvider()->ListTransactions;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processListTransactionsProvider = FsiEngine::WovenFinanceProvider()->ListTransactions;
         $response = $processListTransactionsProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

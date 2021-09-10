@@ -3,7 +3,7 @@
 namespace ProvidersTests\AfricasTalkingProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class QueueStatusTest extends \PHPUnit\Framework\TestCase
 {
@@ -15,8 +15,8 @@ class QueueStatusTest extends \PHPUnit\Framework\TestCase
             "phoneNumbers"      => "+2348120534617, +2349057969601"
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processQueueStatusProvider = $fsiEngineSDK->processAfricasTalkingProvider()->QueueStatus;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processQueueStatusProvider = FsiEngine::AfricasTalkingProvider()->QueueStatus;
         $response = $processQueueStatusProvider->send($formData);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {
