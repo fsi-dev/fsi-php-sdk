@@ -3,7 +3,7 @@
 namespace ProvidersTests\AfricasTalkingProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class FetchMessageTest extends \PHPUnit\Framework\TestCase
 {
@@ -14,8 +14,8 @@ class FetchMessageTest extends \PHPUnit\Framework\TestCase
             "username" => "sandbox",
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processMessageProvider = $fsiEngineSDK->processAfricasTalkingProvider()->Message;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processMessageProvider = FsiEngine::AfricasTalkingProvider()->Message;
         $response = $processMessageProvider->send($formData);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

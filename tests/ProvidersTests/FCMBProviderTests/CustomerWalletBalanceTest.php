@@ -3,7 +3,7 @@
 namespace ProvidersTests\FCMBProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class CustomerWalletBalanceTest extends \PHPUnit\Framework\TestCase
 {
@@ -19,8 +19,8 @@ class CustomerWalletBalanceTest extends \PHPUnit\Framework\TestCase
             'Accept'                    => 'application/json'
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processCustomerWalletBalanceProvider = $fsiEngineSDK->processFCMBProvider()->CustomerWalletBalance;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processCustomerWalletBalanceProvider = FsiEngine::FCMBProvider()->CustomerWalletBalance;
         $response = $processCustomerWalletBalanceProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

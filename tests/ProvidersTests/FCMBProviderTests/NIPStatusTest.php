@@ -3,7 +3,7 @@
 namespace ProvidersTests\FCMBProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class NIPStatusTest extends \PHPUnit\Framework\TestCase
 {
@@ -18,8 +18,8 @@ class NIPStatusTest extends \PHPUnit\Framework\TestCase
             'Accept'                    => 'application/json'
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processNIPStatusProvider = $fsiEngineSDK->processFCMBProvider()->NIPStatus;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processNIPStatusProvider = FsiEngine::FCMBProvider()->NIPStatus;
         $response = $processNIPStatusProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

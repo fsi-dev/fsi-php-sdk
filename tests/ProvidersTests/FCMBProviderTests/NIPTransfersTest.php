@@ -3,7 +3,7 @@
 namespace ProvidersTests\FCMBProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class NIPTransfersTest extends \PHPUnit\Framework\TestCase
 {
@@ -33,8 +33,8 @@ class NIPTransfersTest extends \PHPUnit\Framework\TestCase
             'Accept'                    => 'application/json'
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processNIPTransfersProvider = $fsiEngineSDK->processFCMBProvider()->NIPTransfers;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processNIPTransfersProvider = FsiEngine::FCMBProvider()->NIPTransfers;
         $response = $processNIPTransfersProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

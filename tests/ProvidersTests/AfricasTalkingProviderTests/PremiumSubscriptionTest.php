@@ -3,7 +3,7 @@
 namespace ProvidersTests\AfricasTalkingProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class PremiumSubscriptionTest extends \PHPUnit\Framework\TestCase
 {
@@ -18,8 +18,8 @@ class PremiumSubscriptionTest extends \PHPUnit\Framework\TestCase
             "checkoutToken" => "kallkmalfef8"
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processPremiumSubscriptionProvider = $fsiEngineSDK->processAfricasTalkingProvider()->PremiumSubscription;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processPremiumSubscriptionProvider = FsiEngine::AfricasTalkingProvider()->PremiumSubscription;
         $response = $processPremiumSubscriptionProvider->send($formData);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

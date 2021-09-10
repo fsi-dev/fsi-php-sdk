@@ -6,7 +6,6 @@ use FsiEngine\Providers\Support\ProviderInterface;
 
 class AfricasTalkingIndex implements ProviderInterface
 {
-
     /**
      * @var $apiKey
      * @var $environmentURL

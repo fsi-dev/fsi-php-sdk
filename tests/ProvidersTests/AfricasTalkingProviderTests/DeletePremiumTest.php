@@ -3,7 +3,7 @@
 namespace ProvidersTests\AfricasTalkingProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class DeletePremiumTest extends \PHPUnit\Framework\TestCase
 {
@@ -16,8 +16,8 @@ class DeletePremiumTest extends \PHPUnit\Framework\TestCase
             "keyword"           => "feed"
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processDeletePremiumProvider = $fsiEngineSDK->processAfricasTalkingProvider()->DeletePremium;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processDeletePremiumProvider = FsiEngine::AfricasTalkingProvider()->DeletePremium;
         $response = $processDeletePremiumProvider->send($formData);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

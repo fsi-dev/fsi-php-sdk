@@ -3,7 +3,7 @@
 namespace ProvidersTests\SterlingBankProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class MobileWalletTest extends \PHPUnit\Framework\TestCase
 {
@@ -28,8 +28,8 @@ class MobileWalletTest extends \PHPUnit\Framework\TestCase
             'Appid'                     => '69',
             'ipval'                     => '0'
         ];
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processMobileWalletProvider = $fsiEngineSDK->processSterlingBankProvider()->MobileWallet;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processMobileWalletProvider = FsiEngine::SterlingBankProvider()->MobileWallet;
         $response = $processMobileWalletProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

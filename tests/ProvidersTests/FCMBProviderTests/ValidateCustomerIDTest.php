@@ -3,7 +3,7 @@
 namespace ProvidersTests\FCMBProviderTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class ValidateCustomerIDTest extends \PHPUnit\Framework\TestCase
 {
@@ -21,8 +21,8 @@ class ValidateCustomerIDTest extends \PHPUnit\Framework\TestCase
             'Accept'                    => 'application/json'
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processValidateCustomerIDProvider = $fsiEngineSDK->processFCMBProvider()->ValidateCustomerID;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processValidateCustomerIDProvider = FsiEngine::FCMBProvider()->ValidateCustomerID;
         $response = $processValidateCustomerIDProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {

@@ -3,7 +3,7 @@
 namespace ProvidersTests\EcoBankTests;
 
 use FsiEngine\Constants\Meta;
-use FsiEngine\SDK\FsiEngineSDK;
+use FsiEngine\SDK\FsiEngine;
 
 class MerchantQrCreationTest extends \PHPUnit\Framework\TestCase
 {
@@ -39,8 +39,8 @@ class MerchantQrCreationTest extends \PHPUnit\Framework\TestCase
             'Authorization'             => 'Bearer 85dc50e24f6f36850f48390be3516c518acdc427c5c5113334c'
         ];
 
-        $fsiEngineSDK = new FsiEngineSDK(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
-        $processMerchantQrCreationProvider = $fsiEngineSDK->processEcobankProvider()->MerchantQrCreation;
+        FsiEngine::init(Meta::TESTING_APP_KEY, Meta::TESTING_DEPLOYMENT_TYPE);
+        $processMerchantQrCreationProvider = FsiEngine::EcobankProvider()->MerchantQrCreation;
         $response = $processMerchantQrCreationProvider->send($formData, $header);
         $decodeResponse = json_decode($response);
         if(isset($decodeResponse->status_code) && $decodeResponse->status_code === 200) {
