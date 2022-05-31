@@ -1,2 +1,11 @@
-# fsi-php-sdk
-FSI sdk for PHP
+
+
+
+![enter image description here](https://fsi.ng/assets/img/main_logo.png)
+
+# PHP SDK
+
+
+### **Installation, and Usage Instructions**
+
+### What It Does

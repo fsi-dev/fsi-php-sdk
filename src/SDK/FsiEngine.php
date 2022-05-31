@@ -2,9 +2,11 @@
 namespace FsiEngine\SDK;
 use \FsiEngine\Constants\Meta;
 use FsiEngine\Providers\AfricasTalkingProvider\AfricasTalkingIndex;
+use FsiEngine\Providers\Baxipay\BaxipayIndex;
 use FsiEngine\Providers\Ecobank\EcobankIndex;
 use FsiEngine\Providers\FCMB\FCMBIndex;
 use FsiEngine\Providers\SterlingBankProvider\SterlingBankIndex;
+use FsiEngine\Providers\WEMA\WemaIndex;
 use FsiEngine\Providers\WovenFinance\WovenFinanceIndex;
 
 class FsiEngine
@@ -78,6 +80,16 @@ class FsiEngine
     public static function WovenFinanceProvider()
     {
         $provider = new WovenFinanceIndex(self::$api_key, self::$developmentURL);
+        return $provider->providerServices();
+    }
+
+    public static function BaxiProvider() {
+        $provider = new BaxipayIndex(self::$api_key, self::$developmentURL);
+        return $provider->providerServices();
+    }
+
+    public static function WemaProvider() {
+        $provider  = new WemaIndex(self::$api_key, self::$developmentURL);
         return $provider->providerServices();
     }
 

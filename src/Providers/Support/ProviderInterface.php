@@ -6,7 +6,7 @@ use FsiEngine\Constants\Meta;
 
 interface ProviderInterface
 {
-    /**
+    /**@interface ProviderInterface
      * @param $apiKey
      * @param string $environmentURL
      */
@@ -16,4 +16,5 @@ interface ProviderInterface
      * @return mixed
      */
     public function providerServices();
+
 }

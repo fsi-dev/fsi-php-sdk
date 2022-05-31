@@ -36,12 +36,12 @@ class ResponseHandlers
      */
     static function errorResponse($message = null, $status_code = null,  $request = null, \Exception $trace = null)
     {
-        $code = ($status_code != null) ? $status_code : "404";
+        $code = ($status_code != null) ? $status_code : 404;
         $body = [
-            'message' => $message,
+            'requestResponse' => $message,
             'code' => $code,
             'status_code' => $code,
-            'status' => false
+            'status' => "false"
         ];
 
         if (!is_null($request)) {
@@ -51,7 +51,7 @@ class ResponseHandlers
             }
         }
 
-        return json_encode($body);
+        return json_encode($body, true);
 
 
     }

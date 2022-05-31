@@ -15,6 +15,7 @@ class Meta
     const GET_REQUEST = 'GET';
     const PUT_REQUEST = 'PUT';
     const PATCH_REQUEST = 'PATCH';
+    const DELETE_REQUEST = 'DELETE';
 
     const CURRENT_API_VERSION = 'v1';
 
