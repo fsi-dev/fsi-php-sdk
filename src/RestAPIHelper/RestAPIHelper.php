@@ -53,7 +53,6 @@ class RestAPIHelper
                 'query' => $formQuery,
                 'headers' => $headers
             ]);
-
             $body = $response->getBody()->getContents();
 
             $requestResponse = [
@@ -64,12 +63,14 @@ class RestAPIHelper
             ];
 
         }catch (ClientException $e) {
+
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
+            $responseMessage = $e->getMessage();
             $requestResponse =  [
                 'status' => false,
                 'isError' => true,
-                'message' => $response,
+                'message' => $responseMessage,
                 'responseBody' => $responseBodyAsString
             ];
         }
@@ -122,6 +123,13 @@ class RestAPIHelper
 
     }
 
+    /**
+     * @param array $formData
+     * @param $serviceURL
+     * @param array $additionalHeader
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function PUT(array $formData, $serviceURL, $additionalHeader = []) : array {
         $client = $this->client;
         $apiKey = $this->api_key;
@@ -157,4 +165,94 @@ class RestAPIHelper
 
         return (array)$requestResponse;
     }
+
+    /**
+     * @param array $formData
+     * @param $serviceURL
+     * @param array $additionalHeader
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function DELETE(array $formData, $serviceURL, $additionalHeader = []) {
+
+        $client = $this->client;
+        $apiKey = $this->api_key;
+        $headers = [
+            'sandbox-key' => $apiKey,
+            'Content-Type' => 'application/json'
+        ];
+        $headers = array_merge($headers, $additionalHeader);
+        try {
+
+            $response = $client->request(Meta::DELETE_REQUEST, $serviceURL,
+                [
+                    'body' => json_encode($formData),
+                    'headers' => $headers
+                ]);
+            $body = $response->getBody()->getContents();
+            $requestResponse = [
+                'status' => true,
+                'isError' => false,
+                'body' => $body
+            ];
+
+        }catch (ClientException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+            $requestResponse =  [
+                'status' => false,
+                'isError' => true,
+                'message' => $response,
+                'responseBody' => $responseBodyAsString
+            ];
+        }
+
+        return (array)$requestResponse;
+
+
+    }
+
+    /**
+     * @param array $formData
+     * @param string $serviceURL
+     * @param array $additionalHeader
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function PATCH(array $formData, $serviceURL, $additionalHeader = []) :array {
+        $client = $this->client;
+        $apiKey = $this->api_key;
+        $headers = [
+            'sandbox-key' => $apiKey,
+            'Content-Type' => 'application/json'
+        ];
+        $headers = array_merge($headers, $additionalHeader);
+        try {
+
+            $response = $client->request(Meta::PATCH_REQUEST, $serviceURL,
+                [
+                    'body' => json_encode($formData),
+                    'headers' => $headers
+                ]);
+            $body = $response->getBody()->getContents();
+            $requestResponse = [
+                'status' => true,
+                'isError' => false,
+                'body' => $body
+            ];
+
+        }catch (ClientException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+            $requestResponse =  [
+                'status' => false,
+                'isError' => true,
+                'message' => $response,
+                'responseBody' => $responseBodyAsString
+            ];
+        }
+
+        return (array)$requestResponse;
+    }
+
 }

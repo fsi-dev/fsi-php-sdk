@@ -13,7 +13,7 @@ class GetBillersPaymentItemsTest extends \PHPUnit\Framework\TestCase
             "Referenceid"           => 01,
             "RequestType"           => 01,
             "Translocation"         => 01,
-            "Bvn"                   => 1937247024021,
+            "Bvn"                   => 19372470240,
             "billerid"              => 01
 
         ];

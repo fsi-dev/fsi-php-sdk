@@ -13,7 +13,7 @@ class GetBillersISWTest extends \PHPUnit\Framework\TestCase
             "Referenceid"           => '01',
             "RequestType"           => '01',
             "Translocation"         => '01',
-            "Bvn"                   => '0113917492729',
+            "Bvn"                   => '01139174927',
             "billerid"              => '01'
 
         ];
